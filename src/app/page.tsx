@@ -15,7 +15,7 @@ const Home =() =>{
     
    
     <div className="flex flex-col h-full my-20 md:gap-32 gap-28 ">
-      <div className=" md:h-screen h-96 px-5  ">
+      <div className=" lg:h-screen h-96 px-5  ">
      
      <CarouselDemo/> 
     </div>

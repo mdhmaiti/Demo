@@ -41,7 +41,7 @@ export function CarouselDemo() {
             <div className="p-1">
               <Card className = " bg-gradient-to-tr from-yellow-500 to-orange-500 ">
               <CardContent className="flex justify-start items-center h-72 md:h-96 w-screen aspect-rectangle  overflow-hidden">
-                <div className="w-11/12">
+                <div className=" w-56 md:w-4/5">
                 <p className=" font-semibold lg:text-4xl sm:text-xl text-slate-100 glow text-center whitespace-normal">
       The best car repair app that finds you the best local offers
     </p>
