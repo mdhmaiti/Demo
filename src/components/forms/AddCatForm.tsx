@@ -1,3 +1,4 @@
+"use client"
 import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z, ZodError } from 'zod';
@@ -40,28 +41,8 @@ const AddCatForm = () => {
   
     const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
   
-    const upload = async () => {
-      
-      const APIKEY = process.env.NEXT_CLOUDINARY_API_KEY!
-      if ( typeof acceptedFiles[0] === 'undefined' ) return;
-        const data = new FormData();
-        data.append("file", acceptedFiles[0]);
-        data.append("upload_preset", "grocery_tf1dxrsc");
-        
-        
     
-        const res = await fetch(
-          "https://api.cloudinary.com/v1_1/dizkf7aba/image/upload",
-          {
-            method: "POST",
-           
-            body: data,
-          }
-        );// the data here comes from the new Form data
-    
-        const resData = await res.json();
-        return resData.url;
-       };
+     
   
  // Generate a random string for the slug field
  const generateRandomSlug = () => {
@@ -73,46 +54,11 @@ const AddCatForm = () => {
 
  //submit form
   const onSubmit = async (data: FormData) => {
-    console.log('Form submitted with data:');
-    try {
-      const url = await upload();
-      const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000';
-      const apiURL = `${baseURL}/api/categories`;
-      
-      const response = await fetch(apiURL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          
-
-          ...data,
-	  img: url,
-        }),
-      });
-
-      if (response.ok) {
-        toast({
-          title: "category added successfully",
-        });
-        const responseData = await response.json();
-
-        console.log("Product added successfully:", responseData);
+ 
 
         reset();
         setPreview(null);
-      } else {
-        console.log("category adding failed:", response.statusText);
-        toast({
-          variant: "destructive",
-          title: "Uh oh! Something went wrong.",
-          description: "There was a problem with your request.",
-        });
-      }
-    } catch (error) {
-      console.log("Error submitting form:", error);
-    }
+    
 
     
     

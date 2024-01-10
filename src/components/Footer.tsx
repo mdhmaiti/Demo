@@ -1,62 +1,52 @@
+
 import { Facebook, Instagram, Twitter, Mail } from 'lucide-react';
-import React from 'react';
 
+import Image from 'next/image';
 const Footer = () => {
+ 
+
+
+
   return (
-    <div>
+    <div className='w-full my-10  overflow-hidden '>
       
-      {/* Sun SVG */}
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="#f8d347"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="w-24 h-24 mx-auto mt-4 rotate-sun glow"  
-      >
-        <circle cx="12" cy="12" r="5" />
-        <line x1="12" y1="1" x2="12" y2="3" />
-        <line x1="12" y1="21" x2="12" y2="23" />
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-        <line x1="1" y1="12" x2="3" y2="12" />
-        <line x1="21" y1="12" x2="23" y2="12" />
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-      </svg>
+      <div className='transition-transform duration-1000 transform hover:translate-x-1/2 px-5 '>
+       
+        <Image
+          src="/car-svgrepo-com.svg"
+          height={32}
+          width={32}
+          alt="car"
+          className=' glow'
+        />
+      </div>
+      <div className='w-full h-1 blur-md -z-10 bg-gradient-to-r from-yellow-500 opacity-80 '/>
 
-      {/* Footer with Waves */}
-      <footer className="footer flex flex-col items-center justify-center w-full">
-        <div className=' flex flex-row items-center justify-center space-x-2 w-full'>
-        
-        
-        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className='glow'>
-        <Facebook />
-      </a>
-      <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className='glow'>
-        <Instagram />
-      </a>
-      <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer" className='glow'>
-        <Twitter />
-      </a>
-      <a href="https://www.google.com" target="_blank" rel="noopener noreferrer" className='glow'>
-        <Mail />
-      </a>
 
+      <div className='max-w-screen-xl mx-auto px-6 py-4 grid grid-cols-1 md:grid-cols-3 gap-4  h-full bg-transparent backdrop-blur-lg shadow-lg shadow-slate-400'>
+        {/* Privacy Policy Section */}
+        <div className=''>
+          <h3 className='text-lg font-bold mb-2'>Privacy Policy</h3>
+          <p className='text-sm'>Your privacy is important to us. Read our privacy policy for more information.</p>
         </div>
-        <span className='pb-2 text-sm font-medium text-white tracking-widest'>
-          @medhashis
-        </span>
-        
-        <div className="waves">
-          <div className="wave" id="wave1"></div>
-          <div className="wave" id="wave2"></div>
-          <div className="wave" id="wave3"></div>
-          <div className="wave" id="wave4"></div>
+
+        {/* Contacts Section */}
+        <div className=''>
+          <h3 className='text-lg font-bold mb-2'>Contacts</h3>
+          <p className='text-sm'>Have questions? Reach out to us at <a href='mailto:info@example.com'>info@example.com</a>.</p>
         </div>
-      </footer>
+
+        {/* Download App Section */}
+        <div className=''>
+          <h3 className='text-lg font-bold mb-2'>Download Our App</h3>
+          <p className='text-sm'>Get our app for a seamless car-buying experience. Available on iOS and Android.</p>
+          <div className='flex space-x-2 mt-2'>
+            <a href='#' className='hover:underline text-orange-300 glow'>Download on the App Store</a>
+            <span className="">|</span>
+            <a href='#' className='hover:underline text-orange-300 glow'>Get it on Google Play</a>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

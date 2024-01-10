@@ -4,9 +4,11 @@ import Link from "next/link";
 import { useState } from "react";
 import {
   Book,
+  CarIcon,
   Home,
   Menu,
   Package,
+  Settings,
   ShoppingBag,
   ShoppingCart,
   Tally3,
@@ -15,11 +17,11 @@ import { Button } from "./ui/button";
 
 const navItems = [
   { id: 1, title: "Home", url: "/" },
-  { id: 2, title: "Shop", url: "/shop" },
-  { id: 3, title: "Orders", url: "/orders" },
-  { id: 4, title: "Cart", url: "/cart" },
-  { id: 5, title: "About", url: "/about" },
-  { id: 6, title: "Add", url: "/addProduct" },
+  { id: 2, title: "Shop Owners", url: "/shop" },
+  
+  { id: 3, title: "Car Owners", url: "/car" },
+  { id: 4, title: "About", url: "/about" },
+ 
 
 ];
 
@@ -41,7 +43,7 @@ const MobMenu = () => {
           isMobMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        {navItems.map((item) => (
+        {navItems.map((item:any) => (
           <Link
             className="py-1 text-slate-100 text-lg font-medium  "
             href={item.url}
@@ -54,11 +56,11 @@ const MobMenu = () => {
                 className="text-slate-100 text-xl font-medium "
                 variant="ghost"
               >
-              {item.title === "Cart" && <ShoppingCart />}
-              {item.title === "Shop" && <ShoppingBag />}
-              {item.title === "Home" && <Home />}
-              {item.title === "About" && <Book/>}
-              {item.title === "Orders" && <Package/> }
+                {item.title === "Car Owners" && <CarIcon className='glow'/>}
+                {item.title === "Shop Owners" && <Settings className='glow'/>}
+                {item.title === "Home" && <Home className='glow'/>}
+                {item.title === "About" && <Book className='glow' />}
+                {item.title === "Orders" && <Package className='glow'/> }
               {item.title}
               </Button>
             </div>

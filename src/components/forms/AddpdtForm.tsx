@@ -1,159 +1,77 @@
-" use client";
-// working
-import { useForm } from "react-hook-form";
-
-import { getSession } from "next-auth/react";
-import React, { useCallback, useState } from "react";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { useQuery } from "@tanstack/react-query";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useToast } from "../ui/use-toast";
-import { productSchema } from "@/types/types";
-import { useDropzone} from 'react-dropzone';
+"use client"
+import React, { useCallback, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z, ZodError } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Input } from '../ui/input';
+import { Button } from '../ui/button';
+import { categorySchema } from '@/types/types';
+import { Textarea } from '../ui/textarea';
+import { useToast } from '../ui/use-toast';
+import { useDropzone } from 'react-dropzone';
 import Image from "next/image";
-import { Textarea } from "../ui/textarea";
+import { v4 as uuidv4 } from 'uuid';
 
-type category = {
-  title: string;
-  slug: string;
-};
 
-type TFormData = z.infer<typeof productSchema>;
+type FormData = z.infer<typeof categorySchema>;
 
 const AddPdtForm = () => {
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    reset,
-
-    formState: { errors },
-  } = useForm<TFormData>({
-    resolver: zodResolver(productSchema),
+  const { register, handleSubmit,reset,setValue, formState: { errors } } = useForm<FormData>({
+    resolver: zodResolver(categorySchema),
   });
   const { toast } = useToast();
 
-  // to upload the image function
+  //random string 
+  const [generatedSlug, setGeneratedSlug] = useState<string | null>(null);
+
+    // using dropzone 
+    const onDrop = useCallback((acceptedFiles: Array<File>) => {
+      const file = new FileReader;
   
-  // using dropzone 
-  const onDrop = useCallback((acceptedFiles: Array<File>) => {
-    const file = new FileReader;
-
-    file.onload = function() {
-      setPreview(file.result);
-    }
-
-    file.readAsDataURL(acceptedFiles[0])
-  }, [])
-
-  const { acceptedFiles, getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop
-  });
-
-  const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
-
-  const upload = async () => {
+      file.onload = function() {
+        setPreview(file.result);
+      }
+  
+      file.readAsDataURL(acceptedFiles[0])
+    }, [])
+  
+    const { acceptedFiles, getRootProps, getInputProps, isDragActive } = useDropzone({
+      onDrop
+    });
+  
+    const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
+  
     
-    const APIKEY = process.env.NEXT_CLOUDINARY_API_KEY!
-    if ( typeof acceptedFiles[0] === 'undefined' ) return;
-      const data = new FormData();
-      data.append("file", acceptedFiles[0]);
-      data.append("upload_preset", "grocery_tf1dxrsc");
-      
-      
+     
   
-      const res = await fetch(
-        "https://api.cloudinary.com/v1_1/dizkf7aba/image/upload",
-        {
-          method: "POST",
-         
-          body: data,
-        }
-      );// the data here comes from the new Form data
-  
-      const resData = await res.json();
-      return resData.url;
-     };
+ // Generate a random string for the slug field
+ const generateRandomSlug = () => {
+  const randomSlug = uuidv4();
+  setGeneratedSlug(randomSlug);
+  setValue('slug', randomSlug);
+};
 
-     const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000';
-     const apiURLCat = `${baseURL}/api/categories`;
 
-  // fetching the categories
-  const {
-    isLoading,
-    error,
-    data: categories,
-  } = useQuery({
-    queryKey: ["categories"],
-    queryFn: () =>
-    
-      fetch(apiURLCat).then((res) => res.json()),
-  });
-
-  React.useEffect(() => {
-    // Fetch user's email from session when categories data is available
-    if (!isLoading) {
-      getSession().then((session) => {
-        if (session?.user?.email) {
-          setValue("userEmail", session.user.email);
-        }
-      });
-    }
-  }, [isLoading, setValue]);
-
-  
-
-  const onSubmit = async (data: TFormData) => {
-    console.log('Form submitted with data:')
-    console.log("working")
-    try {
-      const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000';
-      const apiURL = `${baseURL}/api/products`;
-      const url = await upload();
-      const response = await fetch(apiURL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          
-
-          ...data,
-	  img: url,
-        }),
-      });
-
-      if (response.ok) {
-        toast({
-          title: "product added successfully",
-        });
-        const responseData = await response.json();
-
-        console.log("Product added successfully:", responseData);
+ //submit form
+  const onSubmit = async (data: FormData) => {
+ 
 
         reset();
         setPreview(null);
-      } else {
-        console.log("Product adding failed:", response.statusText);
-        toast({
-          variant: "destructive",
-          title: "Uh oh! Something went wrong.",
-          description: "There was a problem with your request.",
-        });
-      }
-    } catch (error) {
-      console.log("Error submitting form:", error);
-    }
+    
+
+    
+    
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col justify-center gap-4"
-    >
-      <label className="text-md font-semibold">Title:</label>
+    <div>
+      {generatedSlug && <p className='mx-auto'>Generated Slug: {generatedSlug}</p>}
+      <Button  className=" w-full my-10"variant={"outline"} onClick={generateRandomSlug}>Generate Random Slug</Button>
+
+    
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-center gap-4">
+     <label className="text-md font-semibold">Title:</label>
       <Input {...register("title", { required: "Title is required" })} />
       {errors.title && (
         <span className="text-sm text-red-500">{errors.title.message}</span>
@@ -161,40 +79,27 @@ const AddPdtForm = () => {
 
       <label className="text-md font-semibold">Description:</label>
       <Textarea {...register("desc")} />
-
-      <label className="text-md font-semibold">Price:</label>
-      <Input
-        {...register("price", { required: "Price is required" })}
-        type="number"
-      />
-      {errors.price && (
-        <span className="text-sm text-red-500">{errors.price.message}</span>
+      {errors.desc && (
+        <span className="text-sm text-red-500">{errors.desc.message}</span>
       )}
-
-      <label className="text-md font-semibold">Category:</label>
-      <select
-        className="outline-none rounded-md text-md p-2 focus:bg-accent focus:text-accent-foreground"
-        {...register("catSlug", { required: "Category is required" })}
-      >
-        <option value="">Select Category</option>
-        {categories?.map((category: category) => (
-          <option key={category.slug} value={category.slug}>
-            {category.title}
-          </option>
-        ))}
-      </select>
-      {errors.catSlug && (
-        <span className="text-sm text-red-500">{errors.catSlug.message}</span>
+     
+      
+      <label className="text-md font-semibold">Slug: </label>
+      <p className = " text-sm text-blue-400 opacity-60"> make it unique otherwise it will not add  </p>
+       <Input {...register("slug", { required: "slug is required" })} />
+      {errors.slug && (
+        <span className="text-sm text-red-500">{errors.slug.message}</span>
       )}
-
-      <label className="flex flex-row items-center gap-2">
-        <p className="text-md font-semibold "> Is Featured:</p>
-        <input {...register("isFeatured")} type="checkbox" />
-      </label>
-
-      {/* handling the image */}
-      <br/>
-      <label className="text-md font-semibold">Picture</label>
+     
+      <label className="text-md font-semibold">color:</label>
+       <Input {...register("color", { required: "color is required" })} />
+      {errors.color && (
+        <span className="text-sm text-red-500">{errors.color.message}</span>
+      )}
+      {errors.color && <span className="text-sm text-red-500"></span>}
+      <br />
+       {/* handling the image */}
+       <label className="text-md font-semibold">Picture</label>
       <div {...getRootProps()}className="border-dotted border-2 border-sky-500 rounded-2xl p-4 opacity-70" >
               <input {...getInputProps()} />
               {
@@ -211,44 +116,12 @@ const AddPdtForm = () => {
           )}
       </div>
 
-      <input type="hidden" {...register("userEmail")} />
+      
 
       <Button type="submit">Submit</Button>
     </form>
+    </div>
   );
 };
 
-export default AddPdtForm;
-
-// using use state 
- // const [file, setFile] = useState<File>();
-
-  // const handleChangeImg = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const target = e.target as HTMLInputElement;
-  //   const item = (target.files as FileList)[0];
-  //   setFile(item);
-  // };
-
-  // const upload = async () => {
-    
-  //   const data = new FormData();
-  //   data.append("file", file!);
-  //   data.append("upload_preset", "grocery_tf1dxrsc");
-
-  //   const res = await fetch(
-  //     "https://api.cloudinary.com/v1_1/dizkf7aba/image/upload",
-  //     {
-  //       method: "POST",
-  //       headers: { "Content-Type": "multipart/form-data" },
-  //       body: data,
-  //     }
-  //   );
-
-  //   const resData = await res.json();
-  //   return resData.url;
-  // };
-  
-      // {/* handling the image */}
-      // <label className="text-md font-semibold">Picture</label>
-      // <Input id="picture" onChange={handleChangeImg} type="file" />
-
+export default AddPdtForm

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import MobMenu from "./MobMenu";
 import { Button } from "./ui/button";
-import { ShoppingCart, ShoppingBag, Home, Book, Package } from "lucide-react";
+import { ShoppingCart, ShoppingBag, Home, Book, Package, CarIcon, Settings2, Settings } from "lucide-react";
 import Image from "next/image";
 import { Pacifico } from "next/font/google";
 import { ModeToggle } from "./ui/darkToggle";
@@ -13,11 +13,11 @@ import { AccountButton } from "./accountButton";
 
 const navItems = [
   { id: 1, title: "Home", url: "/" },
-  { id: 2, title: "Shop", url: "/shop" },
-  { id: 3, title: "Orders", url: "/orders" },
-  { id: 4, title: "Cart", url: "/cart" },
-  { id: 5, title: "About", url: "/about" },
-  { id: 5, title: "add", url: "/addProduct" },
+  { id: 2, title: "Shop Owners", url: "/shop" },
+  
+  { id: 3, title: "Car Owners", url: "/car" },
+  { id: 4, title: "About ", url: "/about" },
+  
 ];
 
 const Navbar = () => {
@@ -35,27 +35,27 @@ const Navbar = () => {
               priority={true}
               alt="Logo"
             />
-            <span className={` text-xl font-semibold hover:text-emerald-400 glow `}>Grocery online</span>
+            <span className={` text-3xl font-semibold hover:text-orange-400 glow  `}>Carma</span>
           </Link>
-          <ModeToggle/>
-           <AccountButton />
+           <ModeToggle/> 
+           {/* <AccountButton /> */}
         </div>
         <div className="hidden lg:flex space-x-4">
-          {navItems.map((item) => (
+          {navItems.map((item:any) => (
             <Link
               className=" text-lg font-medium  "
               href={item.url}
               key={item.id}
             >
               <div className="flex flex-row  justify-center items-center space-x-5">
-                {item.title === "Cart" && <ShoppingCart className='glow'/>}
-                {item.title === "Shop" && <ShoppingBag className='glow'/>}
+                {item.title === "Car Owners" && <CarIcon className='glow'/>}
+                {item.title === "Shop Owners" && <Settings className='glow'/>}
                 {item.title === "Home" && <Home className='glow'/>}
                 {item.title === "About" && <Book className='glow' />}
                 {item.title === "Orders" && <Package className='glow'/> }
                 <Button
                   className=" text-xl font-medium  backdrop-blur-lg "
-                  variant="ghost"
+                  variant="outline"
                 >
                   {item.title}
                 </Button>

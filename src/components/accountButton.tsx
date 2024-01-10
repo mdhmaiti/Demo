@@ -34,17 +34,6 @@ export function AccountButton() {
   const [position, setPosition] = React.useState("bottom");
 
  
-
-  const handleSignIn = async () => {
-    await signIn("google");
-
-    // Handle the response if needed
-  };
-  
-  const handleSignOut = async () => {
-    await signOut();
-  };
-
   //toggle admin
 
  
@@ -78,12 +67,12 @@ export function AccountButton() {
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
           {/* if there is already a user present show logout, if not show login */}
-          {status === "authenticated" && session ? (<div className=" flex flex-col gap-2">
+         (<div className=" flex flex-col gap-2">
             <DropdownMenuRadioItem
             className="flex flex-row items-center justify-center p-2 gap-2"
               onClick={() => {
                 try {
-                  handleSignOut();
+                 
                   toast({
                     title: " sign-out successful",
                   });
@@ -104,31 +93,28 @@ export function AccountButton() {
                 <p className="text-md font-bold">Google Sign-out</p>
                 
             </DropdownMenuRadioItem>
-           
-      <p className="mx-auto">Status: {
-      
-      session.user.isAdmin ? 'Admin' : 'Not Admin'}</p>
+  
       
       <div className="mx-auto my-1">
-       <AdminSwitch  isAdmin={session.user.isAdmin}  /> 
+       {/* <AdminSwitch  isAdmin={session.user.isAdmin}  />  */}
       
       </div>
           
              </div>
             
-          ) : (
+       
             <>
               <DropdownMenuRadioItem
                 className="flex flex-row items-center justify-center p-2 gap-2"
                 onClick={() => {
-                  handleSignIn();
+                
                 }}
                 value="top"
               > <GoogleIcon Height={"30"} Width={"30"}/>
                 <p className="text-md font-bold ">Google Sign-in</p>
               </DropdownMenuRadioItem>
             </>
-          )}
+          
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>

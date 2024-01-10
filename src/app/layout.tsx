@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import AuthProvider from "../components/AuthQueryProvider";
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -22,15 +22,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={` ${inter.className}`}>
-        <div className=" min-w-full h-40 -z-50 absolute inset-0 bg-gradient-to-b from-cyan-500 to-transparent opacity-70 blur-3xl"/ >
+      
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-            <AuthProvider> 
-            <main className="flex flex-col min-h-screen relative">
+            <main className="flex flex-col min-h-screen relative  ">
+              <div className="absolute h-screen  -z-50 inset-8 opacity-30 blur-3xl bg-gradient-to-r from-slate-300 to-rose-500"/>
               <Navbar />
 
               <div className="flex-1"> {children}
@@ -38,10 +38,9 @@ export default function RootLayout({
               
                <Toaster />
               
-              <Footer />
-              <div className="min-w-full h-72 -z-50 absolute bottom-10 bg-gradient-to-b to-cyan-500 from-transparent opacity-50 blur-2xl" />
+               <Footer />
             </main>
-            </AuthProvider>  
+            
         </ThemeProvider>
       </body>
     </html>
