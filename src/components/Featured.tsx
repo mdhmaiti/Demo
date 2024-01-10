@@ -10,13 +10,13 @@ const Featured =  () => {
 
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mx-auto p-4 max-h-screen overflow-y-scroll">
+    <div className=" flex flex-col md:flex-row justify-center items-center gap-10  p-5 md:py-32 mx-5 shadow-md rounded-md shadow-slate-400 bg-slate-100 ">
       {/* Card 1 */}
     
 
-      <Card>
+      <Card className="w-full ">
         <CardTitle>
-          <p>vghvghvgh</p>
+        ............
         </CardTitle>
 
         <CardContent className="flex flex-row justify-center">
@@ -29,13 +29,33 @@ const Featured =  () => {
           />
         </CardContent>
         <CardFooter>
-          <Button>Add to cart</Button>
+          .........
         </CardFooter>
       </Card>
 
-      <Card>
+      <Card className="w-full">
         <CardTitle>
-          <p>vghvghvgh</p>
+          .........
+        </CardTitle>
+
+        <CardContent className="flex flex-row justify-center">
+          <Image
+            src="/MedhaPersonalLogo.png"
+            width={100}
+            height={100}
+            alt="my pic"
+            className="rounded-sm"
+          />
+          
+        </CardContent>
+        <CardFooter>
+         ............
+        </CardFooter>
+      </Card>
+
+      <Card className="w-full">
+        <CardTitle>
+      ............
         </CardTitle>
 
         <CardContent className="flex flex-row justify-center">
@@ -48,13 +68,13 @@ const Featured =  () => {
           />
         </CardContent>
         <CardFooter>
-          <Button>Add to cart</Button>
+      ..........
         </CardFooter>
       </Card>
 
-      <Card>
+      <Card className="w-full">
         <CardTitle>
-          <p>vghvghvgh</p>
+        ............
         </CardTitle>
 
         <CardContent className="flex flex-row justify-center">
@@ -67,313 +87,11 @@ const Featured =  () => {
           />
         </CardContent>
         <CardFooter>
-          <Button>Add to cart</Button>
+         ............
         </CardFooter>
       </Card>
 
-      <Card>
-        <CardTitle>
-          <p>vghvghvgh</p>
-        </CardTitle>
-
-        <CardContent className="flex flex-row justify-center">
-          <Image
-            src="/MedhaPersonalLogo.png"
-            width={100}
-            height={100}
-            alt="my pic"
-            className="rounded-sm"
-          />
-        </CardContent>
-        <CardFooter>
-          <Button>Add to cart</Button>
-        </CardFooter>
-      </Card>
-
-      <Card>
-        <CardTitle>
-          <p>vghvghvgh</p>
-        </CardTitle>
-
-        <CardContent className="flex flex-row justify-center">
-          <Image
-            src="/MedhaPersonalLogo.png"
-            width={100}
-            height={100}
-            alt="my pic"
-            className="rounded-sm"
-          />
-        </CardContent>
-        <CardFooter>
-          <Button>Add to cart</Button>
-        </CardFooter>
-      </Card>
-
-      <Card>
-        <CardTitle>
-          <p>vghvghvgh</p>
-        </CardTitle>
-
-        <CardContent className="flex flex-row justify-center">
-          <Image
-            src="/MedhaPersonalLogo.png"
-            width={100}
-            height={100}
-            alt="my pic"
-            className="rounded-sm"
-          />
-        </CardContent>
-        <CardFooter>
-          <Button>Add to cart</Button>
-        </CardFooter>
-      </Card>
-
-      <Card>
-        <CardTitle>
-          <p>vghvghvgh</p>
-        </CardTitle>
-
-        <CardContent className="flex flex-row justify-center">
-          <Image
-            src="/MedhaPersonalLogo.png"
-            width={100}
-            height={100}
-            alt="my pic"
-            className="rounded-sm"
-          />
-        </CardContent>
-        <CardFooter>
-          <Button>Add to cart</Button>
-        </CardFooter>
-      </Card>
-
-      <Card>
-        <CardTitle>
-          <p>vghvghvgh</p>
-        </CardTitle>
-
-        <CardContent className="flex flex-row justify-center">
-          <Image
-            src="/MedhaPersonalLogo.png"
-            width={100}
-            height={100}
-            alt="my pic"
-            className="rounded-sm"
-          />
-        </CardContent>
-        <CardFooter>
-          <Button>Add to cart</Button>
-        </CardFooter>
-      </Card>
-
-      <Card>
-        <CardTitle>
-          <p>vghvghvgh</p>
-        </CardTitle>
-
-        <CardContent className="flex flex-row justify-center">
-          <Image
-            src="/MedhaPersonalLogo.png"
-            width={100}
-            height={100}
-            alt="my pic"
-            className="rounded-sm"
-          />
-        </CardContent>
-        <CardFooter>
-          <Button>Add to cart</Button>
-        </CardFooter>
-      </Card>
-
-      <Card>
-        <CardTitle>
-          <p>vghvghvgh</p>
-        </CardTitle>
-
-        <CardContent className="flex flex-row justify-center">
-          <Image
-            src="/MedhaPersonalLogo.png"
-            width={100}
-            height={100}
-            alt="my pic"
-            className="rounded-sm"
-          />
-        </CardContent>
-        <CardFooter>
-          <Button>Add to cart</Button>
-        </CardFooter>
-      </Card>
-
-      <Card>
-        <CardTitle>
-          <p>vghvghvgh</p>
-        </CardTitle>
-
-        <CardContent className="flex flex-row justify-center">
-          <Image
-            src="/MedhaPersonalLogo.png"
-            width={100}
-            height={100}
-            alt="my pic"
-            className="rounded-sm"
-          />
-        </CardContent>
-        <CardFooter>
-          <Button>Add to cart</Button>
-        </CardFooter>
-      </Card>
-
-      <Card>
-        <CardTitle>
-          <p>vghvghvgh</p>
-        </CardTitle>
-
-        <CardContent className="flex flex-row justify-center">
-          <Image
-            src="/MedhaPersonalLogo.png"
-            width={100}
-            height={100}
-            alt="my pic"
-            className="rounded-sm"
-          />
-        </CardContent>
-        <CardFooter>
-          <Button>Add to cart</Button>
-        </CardFooter>
-      </Card>
-
-      <Card>
-        <CardTitle>
-          <p>vghvghvgh</p>
-        </CardTitle>
-
-        <CardContent className="flex flex-row justify-center">
-          <Image
-            src="/MedhaPersonalLogo.png"
-            width={100}
-            height={100}
-            alt="my pic"
-            className="rounded-sm"
-          />
-        </CardContent>
-        <CardFooter>
-          <Button>Add to cart</Button>
-        </CardFooter>
-      </Card>
-
-      <Card>
-        <CardTitle>
-          <p>vghvghvgh</p>
-        </CardTitle>
-
-        <CardContent className="flex flex-row justify-center">
-          <Image
-            src="/MedhaPersonalLogo.png"
-            width={100}
-            height={100}
-            alt="my pic"
-            className="rounded-sm"
-          />
-        </CardContent>
-        <CardFooter>
-          <Button>Add to cart</Button>
-        </CardFooter>
-      </Card>
-
-      <Card>
-        <CardTitle>
-          <p>vghvghvgh</p>
-        </CardTitle>
-
-        <CardContent className="flex flex-row justify-center">
-          <Image
-            src="/MedhaPersonalLogo.png"
-            width={100}
-            height={100}
-            alt="my pic"
-            className="rounded-sm"
-          />
-        </CardContent>
-        <CardFooter>
-          <Button>Add to cart</Button>
-        </CardFooter>
-      </Card>
-
-      <Card>
-        <CardTitle>
-          <p>vghvghvgh</p>
-        </CardTitle>
-
-        <CardContent className="flex flex-row justify-center">
-          <Image
-            src="/MedhaPersonalLogo.png"
-            width={100}
-            height={100}
-            alt="my pic"
-            className="rounded-sm"
-          />
-        </CardContent>
-        <CardFooter>
-          <Button>Add to cart</Button>
-        </CardFooter>
-      </Card>
-
-      <Card>
-        <CardTitle>
-          <p>vghvghvgh</p>
-        </CardTitle>
-
-        <CardContent className="flex flex-row justify-center">
-          <Image
-            src="/MedhaPersonalLogo.png"
-            width={100}
-            height={100}
-            alt="my pic"
-            className="rounded-sm"
-          />
-        </CardContent>
-        <CardFooter>
-          <Button>Add to cart</Button>
-        </CardFooter>
-      </Card>
-
-      <Card>
-        <CardTitle>
-          <p>vghvghvgh</p>
-        </CardTitle>
-
-        <CardContent className="flex flex-row justify-center">
-          <Image
-            src="/MedhaPersonalLogo.png"
-            width={100}
-            height={100}
-            alt="my pic"
-            className="rounded-sm"
-          />
-        </CardContent>
-        <CardFooter>
-          <Button>Add to cart</Button>
-        </CardFooter>
-      </Card>
-
-      <Card>
-        <CardTitle>
-          <p>vghvghvgh</p>
-        </CardTitle>
-
-        <CardContent className="flex flex-row justify-center">
-          <Image
-            src="/MedhaPersonalLogo.png"
-            width={100}
-            height={100}
-            alt="my pic"
-            className="rounded-sm"
-          />
-        </CardContent>
-        <CardFooter>
-          <Button>Add to cart</Button>
-        </CardFooter>
-      </Card>
+ 
     </div>
   );
 };

@@ -27,14 +27,7 @@ const Navbar = () => {
       <div className=" flex justify-between items-center w-full">
         <div className=" flex flex-row items-center space-x-1 w-full ">
           <Link href="/" className="flex flex-row  items-center space-x-1">
-            <Image
-              className="rounded-full "
-              src="/MedhaPersonalLogo.png"
-              height={40}
-              width={40}
-              priority={true}
-              alt="Logo"
-            />
+          
             <span className={` text-3xl font-semibold hover:text-orange-400 glow  `}>Carma</span>
           </Link>
            <ModeToggle/> 

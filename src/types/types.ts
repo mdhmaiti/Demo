@@ -6,7 +6,7 @@ import { z } from "zod";
 export const productSchema = z.object({
  
   title: z.string().min(2, {
-    message: "Title must be at least 2 characters.",
+    message: "name must be at least 2 characters.",
   }),
   desc: z.string(),
   img: z.string().optional(),

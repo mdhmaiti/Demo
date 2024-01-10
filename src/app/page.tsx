@@ -14,19 +14,21 @@ const Home =() =>{
  
     
    
-    <div className="flex flex-col h-full my-20 md:space-y-8 space-y-2">
+    <div className="flex flex-col h-full my-20 md:gap-32 gap-28 ">
       <div className=" md:h-screen h-96 px-5  ">
      
      <CarouselDemo/> 
     </div>
+    <Featured/>
+   
     <div className="flex  flex-col md:flex-row mx-auto gap-4  p-4">
-      <Button className=" bg-slate-950 py-7 px-10 shadow-md shadow-slate-400 hover:bg-primary/10 hover:text-slate-950 font-semibold  "><PlaystoreIcon Height={"40"} Width={"40"}/> <p className="">Google play Download</p></Button>
-      <Button className="  bg-slate-200 py-7 px-10 shadow-md shadow-slate-400 hover:bg-primary-foreground/80 text-slate-950 font-semibold "><AppleStore Height={"40"} Width={"40"}/> <p className="">Apple store Download</p></Button>
+      <Button id=""className="  animate-bounce bg-slate-950 py-7 px-10 shadow-md shadow-slate-400 hover:bg-primary/50 text-white font-semibold  "><PlaystoreIcon Height={"40"} Width={"40"}/> <p className="">Google play Download</p></Button>
+      <Button  id = ""className=" animate-bounce bg-slate-200 py-7 px-10 shadow-md shadow-slate-400 hover:bg-primary-foreground/90 text-slate-950 font-semibold "><AppleStore Height={"40"} Width={"40"}/> <p className="">Apple store Download</p></Button>
 
 
     </div>
-   
-    <iframe  className="video " src="https://www.youtube.com/embed/FuJSv_Inzjw?si=F1P653-eKb4DrVx4" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+    
+    <iframe  className="video  " src="https://www.youtube.com/embed/FuJSv_Inzjw?si=F1P653-eKb4DrVx4" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
    
    </div>
     

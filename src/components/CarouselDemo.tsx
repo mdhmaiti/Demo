@@ -36,6 +36,22 @@ export function CarouselDemo() {
       <Carousel setApi={setApi}  className="  mx-10 flex flex-row items-center justify-center">
          <CarouselPrevious />
         <CarouselContent >
+
+        <CarouselItem >
+            <div className="p-1">
+              <Card className = " bg-gradient-to-tr from-yellow-500 to-orange-500 ">
+              <CardContent className="flex justify-start items-center h-72 md:h-96 w-screen aspect-rectangle  overflow-hidden">
+                <div className="w-11/12">
+                <p className=" font-semibold lg:text-4xl sm:text-xl text-slate-100 glow text-center whitespace-normal">
+      The best car repair app that finds you the best local offers
+    </p>
+
+                </div>
+   
+  </CardContent>
+              </Card>
+            </div>
+          </CarouselItem>
         {Array.from({ length: 5 }).map((_, index) => (
           <CarouselItem key={index}>
             <div className="p-1">
@@ -52,6 +68,7 @@ export function CarouselDemo() {
        
         <CarouselNext />
       </Carousel>
+     
     
   )
 }

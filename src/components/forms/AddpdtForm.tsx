@@ -1,105 +1,127 @@
 "use client"
-import React, { useCallback, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { z, ZodError } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Input } from '../ui/input';
-import { Button } from '../ui/button';
-import { categorySchema } from '@/types/types';
-import { Textarea } from '../ui/textarea';
-import { useToast } from '../ui/use-toast';
-import { useDropzone } from 'react-dropzone';
+
+import { useForm } from "react-hook-form";
+
+
+import React, { useCallback, useState } from "react";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useToast } from "../ui/use-toast";
+import { productSchema } from "@/types/types";
+import { useDropzone} from 'react-dropzone';
 import Image from "next/image";
-import { v4 as uuidv4 } from 'uuid';
+import { Textarea } from "../ui/textarea";
 
+type category = {
+  title: string;
+  slug: string;
+};
 
-type FormData = z.infer<typeof categorySchema>;
+type TFormData = z.infer<typeof productSchema>;
 
 const AddPdtForm = () => {
-  const { register, handleSubmit,reset,setValue, formState: { errors } } = useForm<FormData>({
-    resolver: zodResolver(categorySchema),
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+
+    formState: { errors },
+  } = useForm<TFormData>({
+    resolver: zodResolver(productSchema),
   });
   const { toast } = useToast();
 
-  //random string 
-  const [generatedSlug, setGeneratedSlug] = useState<string | null>(null);
+  // to upload the image function
+  
+  // using dropzone 
+  const onDrop = useCallback((acceptedFiles: Array<File>) => {
+    const file = new FileReader;
 
-    // using dropzone 
-    const onDrop = useCallback((acceptedFiles: Array<File>) => {
-      const file = new FileReader;
-  
-      file.onload = function() {
-        setPreview(file.result);
-      }
-  
-      file.readAsDataURL(acceptedFiles[0])
-    }, [])
-  
-    const { acceptedFiles, getRootProps, getInputProps, isDragActive } = useDropzone({
-      onDrop
-    });
-  
-    const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
-  
-    
-     
-  
- // Generate a random string for the slug field
- const generateRandomSlug = () => {
-  const randomSlug = uuidv4();
-  setGeneratedSlug(randomSlug);
-  setValue('slug', randomSlug);
-};
+    file.onload = function() {
+      setPreview(file.result);
+    }
 
+    file.readAsDataURL(acceptedFiles[0])
+  }, [])
 
- //submit form
-  const onSubmit = async (data: FormData) => {
+  const { acceptedFiles, getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop
+  });
+
+  const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
+
  
+      
+      
+  
+     
+
+
+  
+
+  const onSubmit = async (data: TFormData) => {
+    console.log('Form submitted with data:')
+    console.log("working")
+
+     
+     
+        toast({
+          title: "requested added successfully",
+        });
+     
 
         reset();
         setPreview(null);
     
-
-    
-    
   };
 
   return (
-    <div>
-      {generatedSlug && <p className='mx-auto'>Generated Slug: {generatedSlug}</p>}
-      <Button  className=" w-full my-10"variant={"outline"} onClick={generateRandomSlug}>Generate Random Slug</Button>
-
-    
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-center gap-4">
-     <label className="text-md font-semibold">Title:</label>
-      <Input {...register("title", { required: "Title is required" })} />
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col justify-center gap-4"
+    >
+      <label className="text-md font-semibold">Full Name:</label>
+      <Input {...register("title", { required: "Fullname is required" })} />
       {errors.title && (
         <span className="text-sm text-red-500">{errors.title.message}</span>
       )}
 
       <label className="text-md font-semibold">Description:</label>
       <Textarea {...register("desc")} />
-      {errors.desc && (
-        <span className="text-sm text-red-500">{errors.desc.message}</span>
+
+      <label className="text-md font-semibold"># number of shops</label>
+      <Input
+        {...register("price", { required: " it is required is required" })}
+        type="number"
+      />
+      {errors.price && (
+        <span className="text-sm text-red-500">{errors.price.message}</span>
       )}
-     
+
+      <label className="text-md font-semibold">Type of shop</label>
+      <Input
+        className="outline-none rounded-md text-md p-2 focus:bg-accent focus:text-accent-foreground"
+        {...register("catSlug", { required: "Type is required" })}
+      />
+        
+       
       
-      <label className="text-md font-semibold">Slug: </label>
-      <p className = " text-sm text-blue-400 opacity-60"> make it unique otherwise it will not add  </p>
-       <Input {...register("slug", { required: "slug is required" })} />
-      {errors.slug && (
-        <span className="text-sm text-red-500">{errors.slug.message}</span>
+      {errors.catSlug && (
+        <span className="text-sm text-red-500">{errors.catSlug.message}</span>
       )}
-     
-      <label className="text-md font-semibold">color:</label>
-       <Input {...register("color", { required: "color is required" })} />
-      {errors.color && (
-        <span className="text-sm text-red-500">{errors.color.message}</span>
-      )}
-      {errors.color && <span className="text-sm text-red-500"></span>}
-      <br />
-       {/* handling the image */}
-       <label className="text-md font-semibold">Picture</label>
+
+      <label className="flex flex-row items-center gap-2">
+        <p className="text-md font-semibold "> Quick Service:</p>
+        <input {...register("isFeatured")} type="checkbox" />
+      </label>
+
+      {/* handling the image */}
+      <br/>
+      <label className="text-md font-semibold">Picture</label>
       <div {...getRootProps()}className="border-dotted border-2 border-sky-500 rounded-2xl p-4 opacity-70" >
               <input {...getInputProps()} />
               {
@@ -115,13 +137,16 @@ const AddPdtForm = () => {
             </p>
           )}
       </div>
-
-      
+      <br/>
+      <label className="text-md font-semibold">Email</label>
+      <Input  {...register("userEmail")} />
 
       <Button type="submit">Submit</Button>
     </form>
-    </div>
   );
 };
 
-export default AddPdtForm
+export default AddPdtForm;
+
+
+      // <label className="text-md font-semibold">Picture</lab

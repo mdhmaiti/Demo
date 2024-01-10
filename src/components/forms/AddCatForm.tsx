@@ -55,7 +55,9 @@ const AddCatForm = () => {
  //submit form
   const onSubmit = async (data: FormData) => {
  
-
+    toast({
+      title: "car added successfully",
+    });
         reset();
         setPreview(null);
     
@@ -71,7 +73,7 @@ const AddCatForm = () => {
 
     
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-center gap-4">
-     <label className="text-md font-semibold">Title:</label>
+     <label className="text-md font-semibold">Name</label>
       <Input {...register("title", { required: "Title is required" })} />
       {errors.title && (
         <span className="text-sm text-red-500">{errors.title.message}</span>
